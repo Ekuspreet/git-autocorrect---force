@@ -11,3 +11,17 @@ function triggerAutoCorrect(word){
     })
 
 }
+
+function triggerForceAutoCorrect(){
+    const textArea = document.getElementById("textarea");
+
+    // Send a POST request to the server
+    fetch("/api/autocorrect/force", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({content : textArea.value}),  
+    })
+
+}

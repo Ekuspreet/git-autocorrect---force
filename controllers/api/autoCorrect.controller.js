@@ -6,4 +6,9 @@ router.post("/", (req, res) => {
     
 })
 
+router.post("/force", (req, res) => {
+    console.log(req.body);
+    
+})
+
 module.exports = router;
