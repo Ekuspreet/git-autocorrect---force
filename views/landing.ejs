@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="business">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>autocorrecter</title>
+    <link rel="stylesheet" href="/css/output.css" />
+    <link rel="stylesheet" href="/css/globals.css" />
+  </head>
+
+  <body class="flex flex-col justify-around h-dvh p-5">
+    <div class="heading text-3xl mb-4 text-center italic">
+      Git Autocorrect --Force
+    </div>
+    <div class="actions bg-primary">
+      <div class="join">
+        <button class="btn join-item">Open</button>
+        <button class="btn join-item" onclick="triggerFileDownload();">Save</button>
+        <button class="btn join-item">Button</button>
+      </div>
+    </div>
+    <div class="textbox flex-1 flex ">
+      <label class="form-control w-full">
+        <div class="label">
+          <span class="label-text">Click The TextBox To Start Typing.</span>
+          <span class="label-text-alt">Alt label</span>
+        </div>
+        <textarea
+          id="textarea"
+          class="textarea textarea-bordered h-full"
+          
+        ></textarea>
+        <div class="label">
+          <span class="label-text-alt">Your bio</span>
+          <span class="label-text-alt">Alt label</span>
+        </div>
+      </label>
+    </div>
+    <div class="information h-10 bg-primary"></div>
+  </body>
+  <footer></footer>
+<script src="/js/detectWord.js"></script>
+<script src="/js/autoCorrectRequest.js"></script>
+<script src="/js/fileDownload.js"></script>
+  </html>
