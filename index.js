@@ -15,8 +15,8 @@ app.use(bodyParser.json());
 
 
 // Defining the routes here.
-require("./routes/web.routes.js")(app);
-require("./routes/api.routes.js")(app);
+require("@routes/web.routes.js")(app);
+require("@routes/api.routes.js")(app);
 
 app.listen(3000, () => {
   console.log("Server is running on port 3000");

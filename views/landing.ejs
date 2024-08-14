@@ -22,8 +22,8 @@
 
     <form class="fileinput flex">
 
-      <input type="file" class="file-input file-input-bordered w-full max-w-xs" placeholder="Load A .txt File" />
-      <input type="submit" class="btn ml-2 join-item" onclick="" value="Load"></input>
+      <input type="file" id="file-input" class="file-input file-input-bordered w-full max-w-xs" placeholder="Load A .txt File" />
+      <input type="submit" id="load-btn" class="btn ml-2 join-item" onclick="" value="Load"></input>
 
     </form>
     <div class="divider divider-horizontal"></div>
@@ -82,10 +82,13 @@
     </label>
   </div>
   <div class="information h-10 bg-primary"></div>
+<%- include('./partials/confirmationModal.ejs') %>
+
 </body>
 <footer></footer>
 <script src="/js/detectWord.js"></script>
 <script src="/js/autoCorrectRequest.js"></script>
 <script src="/js/fileDownload.js"></script>
+<script src="/js/fileUpload.js"></script>
 
 </html>

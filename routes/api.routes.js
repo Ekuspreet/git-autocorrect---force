@@ -1,6 +1,6 @@
 
-const autoCorrectController = require('./controllers/api/autoCorrect.controller');
-const fileLoadController = require('./controllers/api/fileLoad.controller');
+const autoCorrectController = require('@controllers/api/autoCorrect.controller');
+const fileLoadController = require('@controllers/api/fileLoad.controller');
 
 
 module.exports = (app) => {
