@@ -27,6 +27,7 @@
     "@middlewares": "./middlewares",
     "@configs": "./configurations",
     "@controllers": "./controllers",
-    "@helpers": "./helpers"
+    "@helpers": "./helpers",
+    "@utils": "./utils/"
   }
 }
