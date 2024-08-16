@@ -42,16 +42,15 @@ function generateRegexPatterns(word) {
     return patterns;
 }
 
-function findMatchingWords(word) {
-    const fileContent = fs.readFileSync('/home/raghavrana/MyGitRepos/git-autocorrect---force/words_alpha.txt', 'utf-8');
-    const lines = fileContent.split('\r\n');
+function findMatchingWords(word, word_array) {
+    const lines = word_array;
 
-    const regexPatterns = generateRegexPatterns(word.word);
+    const regexPatterns = generateRegexPatterns(word);
     const matchedWords = []
 
     regexPatterns.forEach((pattern) => {
         lines.forEach((line) => {
-            if (pattern.test(line)){
+            if (pattern.test(line) && !matchedWords.includes(line)){
                 matchedWords.push(line)
             } 
         }) 

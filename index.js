@@ -13,7 +13,6 @@ app.set("view engine", "ejs");
 app.use(express.static("./public"));
 app.use(bodyParser.json());
 
-
 // Defining the routes here.
 require("@routes/web.routes.js")(app);
 require("@routes/api.routes.js")(app);
