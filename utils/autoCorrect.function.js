@@ -23,7 +23,7 @@ function generateRegexPatterns(word) {
         patterns.push(new RegExp(pattern, "i"));
     }
 
-    // one word substitution 
+    // one word exchange 
     for (let i = 0; i < length-1; i++) {
         const pattern = '^' + word.slice(0, i) +  word[i+1] + word[i] + word.slice(i+2) + '$';
         patterns.push(new RegExp(pattern, "i"));
