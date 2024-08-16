@@ -1,15 +1,28 @@
 console.log("Auto Correcting Script Loaded");
 
-function triggerAutoCorrect(word){
-    // Send a POST request to the server
-    fetch("/api/autocorrect", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({word : word}),
-    })
+async function triggerAutoCorrect(word){
+    try {
+        const response = await fetch("/api/autocorrect", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({word : word}),
+        });
 
+        if (response.ok) {
+           
+            const data = await response.json();
+            handleResponse(data);
+           
+        } else {
+            
+            throw new Error("Request failed with status " + response.status);
+        }
+    } catch (error) {
+        // Handle network error or exception
+        console.error(error);
+    }
 }
 
 function triggerForceAutoCorrect(){

@@ -9,7 +9,12 @@ console.log('array generated')
 
 router.post("/", (req, res) => {
     console.log(req.body);
-    console.log(findMatchingWords(req.body.word, WORD_ARRAY))
+    res.status(200).json(
+        {
+            "matching" : findMatchingWords(req.body.word, WORD_ARRAY), 
+        }
+    ) 
+
 })
 
 router.post("/force", (req, res) => {
