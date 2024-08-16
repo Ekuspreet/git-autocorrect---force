@@ -29,23 +29,22 @@ function generateRegexPatterns(word) {
         patterns.push(new RegExp(pattern, "i"));
     }
 
-    console.log(patterns)
     return patterns;
 }
 
 function findMatchingWords(word) {
     const fileContent = fs.readFileSync('/home/raghavrana/MyGitRepos/git-autocorrect---force/words_alpha.txt', 'utf-8');
+    const lines = fileContent.split('\r\n');
 
     const regexPatterns = generateRegexPatterns(word.word);
     const matchedWords = []
 
     regexPatterns.forEach((pattern) => {
-        const lines = fileContent.split('\n');  // Split file content into lines
         lines.forEach((line) => {
-            if (pattern.test(line)) {  // Use test() for a boolean check
-                matchedWords.add(line.trim());  // Add matched line to the Set
-            }
-        });
+            if (pattern.test(line)){
+                matchedWords.push(line)
+            } 
+        }) 
     });
 
     return matchedWords;
