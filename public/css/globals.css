@@ -1,3 +1,7 @@
+@font-face {
+  font-family: 'Afirelove';
+  src: url('../assets/AfireLove-PersonalUse.otf');
+}
 body{
     max-width: 1920px;
     margin: 0 auto;
@@ -105,6 +109,11 @@ body{
     animation-delay: 1.5s;
   }
   
+  #heading{
+    font-family: "Afirelove";
+  }
+
+
   @keyframes spark-1 {
     to {
       stroke-dashoffset: -1000;
