@@ -11,7 +11,7 @@ router.post("/", (req, res) => {
     console.log(req.body);
     res.status(200).json(
         {
-            "matching_word" : replaceWord(req.body.word, WORD_ARRAY, 1), 
+            "matching_word" : replaceWord(req.body.word, WORD_ARRAY, req.body.flag), 
         }
     ) 
 
