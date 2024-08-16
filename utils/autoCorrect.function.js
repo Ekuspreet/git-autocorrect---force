@@ -51,9 +51,9 @@ function searchWord(word, word_array) {
     return word_array.some(line => regex.test(line));
 }
 
-function scrambleWord(word){
-  let typo = word;
-
+function scrambleWord(word) {
+    let typo = word;
+    
     const common = {
         'ph': 'f',
         'f': 'ph',
@@ -70,38 +70,31 @@ function scrambleWord(word){
         'as': 'ass',
     };
     
-    for (const [key, value] of Object.entries(common)) {
-        const regex = new RegExp(key, 'gi');
-        typo = typo.replace(regex, value);
-    }
-
-    // swap shit
     const adjacentKeySwaps = {
         'q': 'w', 'w': 'q', 'e': 'r', 'r': 'e', 't': 'y', 'y': 't', 'u': 'i', 'i': 'u', 'o': 'p', 'p': 'o',
         'a': 's', 's': 'a', 'd': 'f', 'f': 'd', 'g': 'h', 'h': 'g', 'j': 'k', 'k': 'j', 'l': 'k',
         'z': 'x', 'x': 'z', 'c': 'v', 'v': 'c', 'b': 'n', 'n': 'b', 'm': 'n'
     };
-    
-    typo = typo.split('').map(char => {
-        return adjacentKeySwaps[char.toLowerCase()] || char;
-    }).join('');
 
-    // repleat words
-    const doubleLetters = (str) => {
-        return str.replace(/([a-z])/gi, (match) => {
-            return Math.random() > 0.9 ? match + match : match;
-        });
-    };
-    typo = doubleLetters(typo);
+    const rules = ['common', 'adjacentKeySwaps', 'doubleLetters'];
+    const selectedRule = rules[Math.floor(Math.random() * rules.length)];
 
-    // random
-    const randomInsert = (str) => {
-        const positions = Math.floor(Math.random() * (str.length + 1));
-        const randomChar = String.fromCharCode(33 + Math.floor(Math.random() * 15)); // ASCII symbols
-        return str.slice(0, positions) + randomChar + str.slice(positions);
-    };
-    if (Math.random() > 0.7) {
-        typo = randomInsert(typo);
+    if (selectedRule === 'common') {
+        for (const [key, value] of Object.entries(common)) {
+            const regex = new RegExp(key, 'gi');
+            typo = typo.replace(regex, value);
+        }
+    } else if (selectedRule === 'adjacentKeySwaps') {
+        typo = typo.split('').map(char => {
+            return adjacentKeySwaps[char.toLowerCase()] || char;
+        }).join('');
+    } else if (selectedRule === 'doubleLetters') {
+        const doubleLetters = (str) => {
+            return str.replace(/([a-z])/gi, (match) => {
+                return Math.random() > 0.9 ? match + match : match;
+            });
+        };
+        typo = doubleLetters(typo);
     }
 
     return typo;
@@ -109,9 +102,6 @@ function scrambleWord(word){
 
 function cheemglish(word){
     let cheemglish = word;
-
-    // add extra m
-    cheemglish = cheemglish.replace(/([pb])/gi, "m$1");
 
     // double r s t l
     cheemglish = cheemglish.replace(/(r|s|t|l)/gi, "$1$1");
@@ -127,35 +117,27 @@ function cheemglish(word){
     cheemglish = cheemglish.replace(/o/gi, "om");
     cheemglish = cheemglish.replace(/u/gi, "oom");
 
-
     // w'fy
     cheemglish = cheemglish.replace(/f/gi, "fw");
     cheemglish = cheemglish.replace(/l/gi, "w");
 
-    // huehue
-    const insertHuehue = (str) => {
-        const positions = Math.floor(Math.random() * (str.length + 1));
-        return str.slice(0, positions) + "huehue" + str.slice(positions);
-    };
-    
-    cheemglish = insertHuehue(cheemglish);
     return cheemglish;
 }
 
-function corrupt(word, mode, common_words){
-    switch(word) {
-        case 1: // no corruption
+function corrupt(word, mode){
+    switch(mode) {
+        case '1': // no corruption
             return word;
-        case 2: // corrupt only if uncommon 
+        case '2': // corrupt only if uncommon 
             if(common_words.includes(word)){
                 return word;
             }
             return scrambleWord(word)
-        case 3: // no one is spared 
+        case '3': // no one is spared 
             return scrambleWord(word)
-        case 4: // cheemglish
+        case '4': // cheemglish
             return cheemglish(word)
-            
+    }        
 }
 
 function replaceWord(word, word_array, mode) {

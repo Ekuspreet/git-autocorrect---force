@@ -1,13 +1,14 @@
 console.log("Auto Correcting Script Loaded");
 
-async function triggerAutoCorrect(word){
+async function triggerAutoCorrect(word){ 
+
     try {
         const response = await fetch("/api/autocorrect", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({word : word}),
+            body: JSON.stringify({word : word, flag: document.getElementById("option").value}),
         });
 
         if (response.ok) {
