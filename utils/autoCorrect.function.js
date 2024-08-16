@@ -104,7 +104,7 @@ function cheemglish(word){
     let cheemglish = word;
 
     // double r s t l
-    cheemglish = cheemglish.replace(/(r|s|t|l)/gi, "$1$1");
+    cheemglish = cheemglish.replace(/(r|t|l)/gi, "$1$1");
 
     // sh ch
     cheemglish = cheemglish.replace(/s/gi, (match, offset) => {
@@ -112,7 +112,8 @@ function cheemglish(word){
     });
 
     // vowels
-    cheemglish = cheemglish.replace(/(a|e)/gi, "am");
+    cheemglish = cheemglish.replace(/a/gi, "am");
+    cheemglish = cheemglish.replace(/e/gi, "em");
     cheemglish = cheemglish.replace(/i/gi, "im");
     cheemglish = cheemglish.replace(/o/gi, "om");
     cheemglish = cheemglish.replace(/u/gi, "oom");
@@ -145,19 +146,21 @@ function replaceWord(word, word_array, mode) {
     if(searchWord(word, word_array)){
         return corrupt(word, mode);
     }
+    
+    else{
+        const lines = word_array;
 
-    const lines = word_array;
+        const regexPatterns = generateRegexPatterns(word);
+        const matchedWords = []
 
-    const regexPatterns = generateRegexPatterns(word);
-    const matchedWords = []
-
-    regexPatterns.forEach((pattern) => {
-        lines.forEach((line) => {
-            if (pattern.test(line) && !matchedWords.includes(line)){
-                matchedWords.push(line)
-            } 
-        }) 
-    });
+        regexPatterns.forEach((pattern) => {
+            lines.forEach((line) => {
+                if (pattern.test(line) && !matchedWords.includes(line)){
+                    matchedWords.push(line)
+                } 
+            }) 
+        });
+    }
 
     return matchedWords[0];
 }
