@@ -3,7 +3,7 @@ const fs = require('fs');
 const router = express.Router();
 const findMatchingWords = require('@utils/autoCorrect.function.js')
 
-const fileContent = fs.readFileSync('/home/raghavrana/MyGitRepos/git-autocorrect---force/words_alpha.txt', 'utf-8'); 
+const fileContent = fs.readFileSync('words_alpha.txt', 'utf-8'); 
 const WORD_ARRAY = fileContent.split('\r\n');
 console.log('array generated')
 
