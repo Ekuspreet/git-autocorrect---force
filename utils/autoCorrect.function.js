@@ -2,33 +2,43 @@ const fs = require('fs');
 
 function generateRegexPatterns(word) {
 
+    const cache = []
     const patterns = [];
     const length = word.length;
 
-    // one extra character
+    // prepair cache
+    for(let i = 0; i <= length; i++){
+        cache.push(word.slice(0, i))
+    }
+    for(let i = 1; i <= length; i++){
+        cache.push(word.slice(i, length))
+    }
+
+    // one extra character (n+1)
     for (let i = 0; i <= length; i++) {
-        const pattern = '^' + word.slice(0, i) + '.' + word.slice(i + 1) + '$';
+        const pattern = '^' + cache[i] + '.' + cache[length+i] + '$';
         patterns.push(new RegExp(pattern, "i"));
     }
 
-    // one word deletion
+    // one character deletion (n)
     for (let i = 0; i < length; i++) {
-        const pattern = '^' + word.slice(0, i) + word.slice(i + 1) + '$';
+        const pattern = '^' + cache[i] + cache[length+1+i] + '$';
         patterns.push(new RegExp(pattern, "i"));
     }
 
-    // one word substitution 
+    // one character substitution (n) 
     for (let i = 0; i < length; i++) {
-        const pattern = '^' + word.slice(0, i) + '.' + word.slice(i + 1) + '$';
+        const pattern = '^' + cache[i] + '.' + cache[length+1+i] + '$';
         patterns.push(new RegExp(pattern, "i"));
     }
 
-    // one word exchange 
+    // one word exchange (n-1)
     for (let i = 0; i < length-1; i++) {
-        const pattern = '^' + word.slice(0, i) +  word[i+1] + word[i] + word.slice(i+2) + '$';
+        const pattern = '^' + cache[i] +  word[i+1] + word[i] + cache[length+2+i] + '$';
         patterns.push(new RegExp(pattern, "i"));
     }
 
+    console.log(patterns)
     return patterns;
 }
 
