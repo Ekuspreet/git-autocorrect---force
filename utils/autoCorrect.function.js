@@ -155,7 +155,7 @@ function corrupt(word, mode, common_words){
             return scrambleWord(word)
         case 4: // cheemglish
             return cheemglish(word)
-            
+    }
 }
 
 function replaceWord(word, word_array, mode) {
