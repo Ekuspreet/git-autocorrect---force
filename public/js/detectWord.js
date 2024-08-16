@@ -3,6 +3,7 @@ console.log("Word Detection Script Loaded");
 const textArea = document.getElementById("textarea");
 
 textArea.addEventListener("keydown", (event) => {
+    updateUI();
     if (event.key === "Enter" || event.key === " ") {
         const cursorPosition = textArea.selectionStart;
         let startIndex = cursorPosition - 1;

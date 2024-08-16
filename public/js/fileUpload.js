@@ -79,6 +79,7 @@ function processFileOption() {
                 // Overwrite content
                 textArea.value = fileContent;
             }
+            updateUI();
         };
         reader.readAsText(file);
     }
