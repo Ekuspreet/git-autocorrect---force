@@ -56,7 +56,7 @@ function findMatchingWords(word, word_array) {
         }) 
     });
 
-    return matchedWords;
+    return matchedWords[0];
 }
 
 module.exports = findMatchingWords;

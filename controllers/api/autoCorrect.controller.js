@@ -11,7 +11,7 @@ router.post("/", (req, res) => {
     console.log(req.body);
     res.status(200).json(
         {
-            "matching" : findMatchingWords(req.body.word, WORD_ARRAY), 
+            "matching_word" : findMatchingWords(req.body.word, WORD_ARRAY), 
         }
     ) 
 
