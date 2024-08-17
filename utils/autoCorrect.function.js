@@ -82,23 +82,29 @@ function scrambleWord(word) {
     if (selectedRule === 'common') {
         for (const [key, value] of Object.entries(common)) {
             const regex = new RegExp(key, 'gi');
-            typo = typo.replace(regex, value);
+            if (regex.test(typo)) {
+                typo = typo.replace(regex, value);
+                break;
+            }
         }
     } else if (selectedRule === 'adjacentKeySwaps') {
-        typo = typo.split('').map(char => {
-            return adjacentKeySwaps[char.toLowerCase()] || char;
-        }).join('');
+        const chars = typo.split('');
+        const index = Math.floor(Math.random() * chars.length);
+        const char = chars[index].toLowerCase();
+        if (adjacentKeySwaps[char]) {
+            chars[index] = adjacentKeySwaps[char];
+            typo = chars.join('');
+        }
     } else if (selectedRule === 'doubleLetters') {
-        const doubleLetters = (str) => {
-            return str.replace(/([a-z])/gi, (match) => {
-                return Math.random() > 0.9 ? match + match : match;
-            });
-        };
-        typo = doubleLetters(typo);
+        const index = Math.floor(Math.random() * typo.length);
+        typo = typo.slice(0, index) + typo[index] + typo.slice(index);
     }
 
     return typo;
 }
+
+// Example usage
+console.log(scrambleWord("example"));
 
 function cheemglish(word){
     let cheemglish = word;
@@ -144,10 +150,12 @@ function corrupt(word, mode){
 function replaceWord(word, word_array, mode) {
 
     if(searchWord(word, word_array)){
+        console.log("correct")
         return corrupt(word, mode);
     }
     
     else{
+        console.log("wrong")
         const lines = word_array;
 
         const regexPatterns = generateRegexPatterns(word);
@@ -160,9 +168,13 @@ function replaceWord(word, word_array, mode) {
                 } 
             }) 
         });
+
+        if(matchedWords.length == 0){
+            return word
+        }
+        return matchedWords[0];
     }
 
-    return matchedWords[0];
 }
 
 module.exports = replaceWord;
