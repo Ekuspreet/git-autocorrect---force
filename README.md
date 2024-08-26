@@ -91,5 +91,6 @@ Use the following tags:
 
 - [Raghavjit Rana](https://github.com/RaghavJit)
 - [Ekuspreet Singh](https://github.com/Ekuspreet)
+- [Chandanbir Singh](https://github.com/singh-chandanbir)
 
 
