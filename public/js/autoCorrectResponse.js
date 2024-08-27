@@ -10,3 +10,9 @@ function handleResponse(data){
     textarea.value = updatedText
 
 };
+
+function handleForceResponse(data){
+    console.log(data.matching_word);
+    textarea.value += data.matching_word+' ';
+
+}

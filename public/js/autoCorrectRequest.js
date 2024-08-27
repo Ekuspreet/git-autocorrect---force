@@ -1,6 +1,6 @@
 console.log("Auto Correcting Script Loaded");
 
-async function triggerAutoCorrect(word){ 
+async function triggerAutoCorrect(word,type = "normal"){ 
 
     try {
         const response = await fetch("/api/autocorrect", {
@@ -14,7 +14,12 @@ async function triggerAutoCorrect(word){
         if (response.ok) {
            
             const data = await response.json();
-            handleResponse(data);
+            if(type == "forced"){
+                handleForceResponse(data);
+            }else{
+
+                handleResponse(data);
+            }
            
         } else {
             
@@ -24,18 +29,4 @@ async function triggerAutoCorrect(word){
         // Handle network error or exception
         console.error(error);
     }
-}
-
-function triggerForceAutoCorrect(){
-    const textArea = document.getElementById("textarea");
-
-    // Send a POST request to the server
-    fetch("/api/autocorrect/force", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({content : textArea.value}),  
-    })
-
 }
